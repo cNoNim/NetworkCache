@@ -1,5 +1,6 @@
 /.vs
 /packages
+/Sources/NetworkCache.Client/Clients
 bin
 obj
 
