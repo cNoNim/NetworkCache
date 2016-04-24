@@ -1,0 +1,104 @@
+﻿#<laconf>
+  compiler
+  {
+    using { ns="NFX" }
+    using { ns="NFX.Wave" }
+    using { ns="NFX.Wave.Templatization" }
+    base-class-name="NFX.Wave.Templatization.WaveTemplate"
+    namespace="NetworkCache.Pages"
+  }
+#</laconf>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <style>
+    html {
+      font-family: Verdana;
+      font-size: 17px;
+    }
+    #root {
+      text-align: center;
+      margin: 40px 0;
+      width: 100%;
+    }
+    #form-container {
+      width: 300px;
+      display: inline-block;
+      margin: auto;
+    }
+  </style>
+  <link rel="stylesheet" href="/res/common.css" type="text/css">
+  <script src="/stock/site/script/jquery-2.1.4.min.js"></script>
+  <script src="/stock/site/script/wv.js"></script>
+  <script src="/stock/site/script/wv.gui.js"></script>
+</head>
+<body>
+  <div id="root">
+    <div id="form-container">
+      <div data-wv-rid="v1">
+        <div data-wv-fname="key"></div>
+        <button onclick="GET(); return false;">Get</button>
+        <div data-wv-fname="value"></div>
+        <button onclick="PUT(); return false;">Put</button>
+        <button onclick="DELETE(); return false;">Delete</button>
+      </div>
+    </div>
+    <script>
+      var REC = new WAVE.RecordModel.Record({
+        ID: 'R1',
+        fields: [
+          { def: { Name: 'key', Type: 'string', Required: true, Placeholder: 'Enter key' } },
+          { def: { Name: 'value', Type: 'string', Placeholder: 'Enter value' } }
+        ] });
+      var RVIEW = new WAVE.RecordModel.RecordView("v1", REC);
+      function GET() {
+        var xhr = new XMLHttpRequest();
+        var key = REC.fieldByName("key").value();
+        var value = JSON.stringify(REC.fieldByName("value"));
+        xhr.open("GET", "/api/cache?key=" + key);
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            alert(key + " - GET: " + xhr.responseText);
+            console.log(key + " - GET: " + JSON.stringify(xhr.responseText));
+            value.value(JSON.parse(xhr.responseText));
+          }
+          if (xhr.readyState == 4 && xhr.status == 404) {
+            alert(key + " - Not Found!");
+            console.log(key + " - Not Found!");
+            value.value("");
+          }
+        }
+        xhr.send();
+      }
+      function PUT() {
+        var xhr = new XMLHttpRequest();
+        var key = REC.fieldByName("key").value();
+        var value = JSON.stringify(REC.fieldByName("value").value());
+        xhr.open("PUT", "/api/cache?key=" + key);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            alert(key + " - PUT: " + xhr.responseText);
+            console.log(key + " - PUT: " + JSON.stringify(value));
+          }
+        }
+        xhr.send(value);
+      }
+      function DELETE() {
+        var xhr = new XMLHttpRequest();
+        var key = REC.fieldByName("key").value();
+        xhr.open("DELETE", "/api/cache?key=" + key);
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            alert(key + " - DELETE: " + xhr.responseText);
+            console.log(key + " - DELETE: " + JSON.stringify(xhr.responseText));
+          }
+        }
+        xhr.send();
+      }
+    </script>
+  </div>
+</body>
+</html>

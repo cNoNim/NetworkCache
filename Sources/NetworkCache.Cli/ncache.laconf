@@ -1,0 +1,22 @@
+﻿application
+{
+  cache-service-node="sync://localhost:8000"
+
+  glue
+  {
+    bindings
+    {
+      binding { name=sync type="NFX.Glue.Native.SyncBinding, NFX" }
+    }
+  }
+
+  log
+  {
+    destination
+    {
+      type="NFX.Log.Destinations.ConsoleDestination, NFX"
+      colored=true
+      generate-failover-msg=true
+    }
+  }
+}

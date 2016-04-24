@@ -1,0 +1,52 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sources", "Sources", "{8BE7920A-802D-42C2-B40F-EFD4BB5E29E9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D5D59D98-352A-4C6D-A734-93149D41ABCE}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkCache.Server", "Sources\NetworkCache.Server\NetworkCache.Server.csproj", "{507A9459-D3CD-4A3B-B44F-0E920ADBDED7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkCache.Contracts", "Sources\NetworkCache.Contracts\NetworkCache.Contracts.csproj", "{FB32E5EA-5E77-4429-8CC3-7EB8FF8565A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkCache.Client", "Sources\NetworkCache.Client\NetworkCache.Client.csproj", "{55F2873A-B896-4C44-AB26-5BAC06DD0D60}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkCache.Cli", "Sources\NetworkCache.Cli\NetworkCache.Cli.csproj", "{EE5A4D6E-496B-4D1E-8559-34CDB3CC7F1D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{507A9459-D3CD-4A3B-B44F-0E920ADBDED7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{507A9459-D3CD-4A3B-B44F-0E920ADBDED7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{507A9459-D3CD-4A3B-B44F-0E920ADBDED7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{507A9459-D3CD-4A3B-B44F-0E920ADBDED7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB32E5EA-5E77-4429-8CC3-7EB8FF8565A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB32E5EA-5E77-4429-8CC3-7EB8FF8565A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB32E5EA-5E77-4429-8CC3-7EB8FF8565A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB32E5EA-5E77-4429-8CC3-7EB8FF8565A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55F2873A-B896-4C44-AB26-5BAC06DD0D60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55F2873A-B896-4C44-AB26-5BAC06DD0D60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55F2873A-B896-4C44-AB26-5BAC06DD0D60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55F2873A-B896-4C44-AB26-5BAC06DD0D60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE5A4D6E-496B-4D1E-8559-34CDB3CC7F1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE5A4D6E-496B-4D1E-8559-34CDB3CC7F1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE5A4D6E-496B-4D1E-8559-34CDB3CC7F1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE5A4D6E-496B-4D1E-8559-34CDB3CC7F1D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{507A9459-D3CD-4A3B-B44F-0E920ADBDED7} = {8BE7920A-802D-42C2-B40F-EFD4BB5E29E9}
+		{FB32E5EA-5E77-4429-8CC3-7EB8FF8565A4} = {8BE7920A-802D-42C2-B40F-EFD4BB5E29E9}
+		{55F2873A-B896-4C44-AB26-5BAC06DD0D60} = {8BE7920A-802D-42C2-B40F-EFD4BB5E29E9}
+		{EE5A4D6E-496B-4D1E-8559-34CDB3CC7F1D} = {8BE7920A-802D-42C2-B40F-EFD4BB5E29E9}
+	EndGlobalSection
+EndGlobal

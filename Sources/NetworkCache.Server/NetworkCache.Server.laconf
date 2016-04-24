@@ -1,0 +1,91 @@
+﻿application
+{
+  cache-service-node="inproc://"
+  log-csv="NFX.Log.Destinations.CSVFileDestination, NFX"
+  log-debug="NFX.Log.Destinations.DebugDestination, NFX"
+
+  glue
+  {
+    bindings
+    {
+      binding { name=sync type="NFX.Glue.Native.SyncBinding, NFX" }
+      binding { name=inproc type="NFX.Glue.Native.InProcBinding, NFX" }
+    }
+    servers
+    {
+      server
+      {
+        name=network-cache-inproc node="inproc://"
+        contract-servers="NetworkCache.Services.Cache, NetworkCache.Server"
+      }
+      server
+      {
+        name=network-cache-sync node="sync://*:8000"
+        contract-servers="NetworkCache.Services.Cache, NetworkCache.Server"
+      }
+    }
+  }
+
+  log
+  {
+    destination
+    {
+      name="NetworkCache"
+      type=$(/$log-debug)
+      path=$"logs/"
+      name-time-format="yyyyMMdd"
+      generate-failover-msg=true
+    }
+  }
+
+  wave
+  {
+    server
+    {
+      prefix { name="http://+:8080/" }
+
+      dispatcher
+      {
+        filter
+        {
+          order=0
+          name="Log All"
+          type="NFX.Wave.Filters.LoggingFilter, NFX.Wave"
+          before { match { name="all" } }
+          after { match { name="all" } }
+        }
+
+        filter
+        {
+          order=1
+          name="Errors"
+          type="NFX.Wave.Filters.ErrorFilter, NFX.Wave"
+          log { match { name="all" } }
+        }
+
+        handler
+        {
+          order=0
+          type="NFX.Wave.Handlers.FileDownloadHandler, NFX.Wave"
+          root-path=$"Resources/"
+          match { path="/res/{*filePath}" }
+        }
+
+        handler
+        {
+          order=100
+          type="NFX.Wave.Handlers.StockContentSiteHandler, NFX.Wave"
+          match{ path="/stock/{*path}"}
+        }
+
+        handler
+        {
+          order=200
+          type="NFX.Wave.Handlers.MVCHandler, NFX.Wave"
+          type-location { assembly="NetworkCache.Server.exe" ns { name="NetworkCache.Controllers" } }
+          match { path="/{type=Api}/{mvc-action=Index}" var { query-name="*" } }
+        }
+      }
+    }
+  }
+}
